@@ -7,13 +7,20 @@
 
 import UIKit
 final class MovieCell: UITableViewCell {
+    
+    // MARK: - Identifier
+    
     static let identifier: String = "MovieCell"
+    
+    // MARK: - UI Components
     
     private let titleLabel = UILabel()
     private let releaseDateLabel = UILabel()
     private let ratingLabel = UILabel()
     private let overviewLabel = UILabel()
     private let posterImageView = UIImageView()
+    
+    // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,6 +29,9 @@ final class MovieCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Setup UI
+    
     private func setupUI() {
         backgroundColor = .systemTeal
         contentView.backgroundColor = .black
@@ -44,7 +54,7 @@ final class MovieCell: UITableViewCell {
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = 8
         posterImageView.image = UIImage(systemName: "photo")
-    
+        
         let textStackView = UIStackView(arrangedSubviews: [
             titleLabel,
             ratingLabel,
@@ -61,7 +71,6 @@ final class MovieCell: UITableViewCell {
             textStackView ])
         
         mainStackView.axis = .horizontal
-//        mainStackView.backgroundColor = .darkGray
         mainStackView.spacing = 10
         mainStackView.alignment = .top
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,31 +85,22 @@ final class MovieCell: UITableViewCell {
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12)])
     }
+    
+    // MARK: - Configure Cell
+    
     func configure(movie: Movie) {
-            titleLabel.text = movie.title
-            releaseDateLabel.text = "\(movie.releaseDate)"
-            ratingLabel.text = "⭐️ \(movie.voteAverage)"
-            overviewLabel.text = movie.overview
-            
-            if let posterPath = movie.posterPath {
-                let fullImageURL = APIConstants.shareImagePathUrl() + posterPath
-                posterImageView.fetchDataFrom(serverUrl: fullImageURL)
-            } else {
-               posterImageView.image = UIImage(systemName: "photo")
-            }
-        }
+        titleLabel.text = movie.title
+        releaseDateLabel.text = "\(movie.releaseDate)"
+        ratingLabel.text = "⭐️ \(movie.voteAverage)"
+        overviewLabel.text = movie.overview
         
-        
-        override func prepareForReuse() {
-            super.prepareForReuse()
-            
-            titleLabel.text = nil
-            releaseDateLabel.text = nil
-            ratingLabel.text = nil
-            overviewLabel.text = nil
+        if let posterPath = movie.posterPath {
+            let fullImageURL = APIConstants.shareImagePathUrl() + posterPath
+            posterImageView.fetchDataFrom(serverUrl: fullImageURL)
+        } else {
             posterImageView.image = UIImage(systemName: "photo")
         }
-        
     }
     
+}
 

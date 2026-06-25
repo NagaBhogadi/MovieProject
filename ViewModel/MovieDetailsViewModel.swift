@@ -7,40 +7,33 @@
 import Foundation
 
 protocol MovieDetailsViewModelProtocol: AnyObject {
-    func fetchMovies(completion: @escaping() -> Void)
-    func numberOfMovies()-> Int
+    func fetchMovies(completion: @escaping () -> Void)
+    func numberOfMovies() -> Int
     func movie(at index: Int) -> Movie
-
-    
 }
 
-class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
+final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
     
-
+    // MARK: - Properties
+    
     private var movies: [Movie] = []
-    
     
     // MARK: - API Call
     
-    func fetchMovies(completion: @escaping() -> Void) {
-        
-        NetworkManager.shared.fetchDataFrom(serverUrl: APIConstants.sharePathUrl()){
-            [weak self] fetchedMovies in
-            defer {
-                completion()
-            }
-            guard let self = self else { return }
-            self.movies = fetchedMovies
+    func fetchMovies(completion: @escaping () -> Void) {
+        NetworkManager.shared.fetchDataFrom(serverUrl: APIConstants.sharePathUrl()) { [weak self] fetchedMovies in
+            self?.movies = fetchedMovies
             completion()
         }
     }
-// MARK:- Helper Method
     
-func numberOfMovies() -> Int {
-            return movies.count
-        }
-func movie(at index: Int) -> Movie {
-            return movies[index]
-        }
+    // MARK: - Helper Methods
+    
+    func numberOfMovies() -> Int {
+        return movies.count
+    }
+    func movie(at index: Int) -> Movie {
+        return movies[index]
+    }
 }
 

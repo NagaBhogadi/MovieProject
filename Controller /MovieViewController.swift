@@ -5,24 +5,23 @@
 //  Created by Naga Rajitha Bhogadi on 6/24/26.
 //
 
-//
-//  MovieViewController.swift
-//  MobileApp
-//
-
 import UIKit
 
 // MARK: - Movie View Controller
 
 final class MovieViewController: UIViewController {
     
+    // MARK: - UI Components
     
     private let tableView = UITableView()
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     
+    // MARK: - Properties
     //   TODO: -  need to replace with dependency injection
     
     private let viewModel: MovieDetailsViewModelProtocol
+    
+    // MARK: - Initializer
     
     init(viewModel: MovieDetailsViewModelProtocol) {
         self.viewModel = viewModel
@@ -53,8 +52,6 @@ final class MovieViewController: UIViewController {
             }
         }
     }
-        
-        
     
     // MARK: - Set up TableView
     
@@ -76,9 +73,7 @@ final class MovieViewController: UIViewController {
         ])
     }
     
-    
-    
-    // MARK: - Setup Loader
+    // MARK: - Setup ActivityIndicator
     
     private func setupActivityIndicator() {
         view.addSubview(activityIndicator)
@@ -93,71 +88,66 @@ final class MovieViewController: UIViewController {
         ])
     }
 }
-    
-    
-    
-    //MARK: - Progress Method
-    
-    extension MovieViewController {
-        func showLoader() {
-            activityIndicator.startAnimating()
-            tableView.isHidden = true
-        }
-        
-        func hideLoader() {
-            activityIndicator.stopAnimating()
-            tableView.isHidden = false
-        }
-        
-        func reloadTableView() {
-            tableView.reloadData()
-        }
-    }
 
-    
-    
-    // MARK: - UITableViewDataSource
-    
-    extension MovieViewController: UITableViewDataSource {
-        
-        func tableView(
-            _ tableView: UITableView,
-            numberOfRowsInSection section: Int
-        ) -> Int {
-            viewModel.numberOfMovies()
-        }
-        
-        func tableView(
-            _ tableView: UITableView,
-            cellForRowAt indexPath: IndexPath
-        ) -> UITableViewCell {
-            
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: MovieCell.identifier,
-                for: indexPath
-            ) as? MovieCell else {
-                return UITableViewCell()
-            }
-            
-            cell.configure(movie: viewModel.movie(at:indexPath.row))
-            
-            return cell
-        }
+//MARK: - Progress Method
+
+extension MovieViewController {
+    func showLoader() {
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
     }
-    // MARK: - UITableViewDelegate
-    
-    extension MovieViewController: UITableViewDelegate {
-        
-        func tableView(
-            _ tableView: UITableView,
-            didSelectRowAt indexPath: IndexPath
-        ) {
-            let selectedMovie = viewModel.movie(at: indexPath.row)
-            print("Selected movie:",selectedMovie.title)
-            tableView.deselectRow(at: indexPath, animated: true)
-            let detailVC = MovieDetailViewController(movie: selectedMovie)
-            navigationController?.pushViewController(detailVC, animated: true)
-        }
+    func hideLoader() {
+        activityIndicator.stopAnimating()
+        tableView.isHidden = false
     }
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension MovieViewController: UITableViewDataSource {
+    
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        viewModel.numberOfMovies()
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MovieCell.identifier,
+            for: indexPath
+        ) as? MovieCell else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(movie: viewModel.movie(at:indexPath.row))
+        
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension MovieViewController: UITableViewDelegate {
+    
+    func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        let selectedMovie = viewModel.movie(at: indexPath.row)
+        print("Selected movie:",selectedMovie.title)
+        tableView.deselectRow(at: indexPath, animated: true)
+        let detailVC = MovieDetailViewController(movie: selectedMovie)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
 
 

@@ -5,19 +5,18 @@
 //  Created by Naga Rajitha Bhogadi on 6/24/26.
 //
 
-//
-//  MovieDetailViewController.swift
-//  MovieProject
-//
 
 import UIKit
 
 final class MovieDetailViewController: UIViewController {
     
+    // MARK: - Properties
+    
     private let movie: Movie
     
+    // MARK: - UI Components
+    
     private let backdropImageView = UIImageView()
-//    private let posterImageView = UIImageView()
     private let titleLabel = UILabel()
     private let releaseDateLabel = UILabel()
     private let ratingLabel = UILabel()
@@ -25,6 +24,8 @@ final class MovieDetailViewController: UIViewController {
     private let popularityLabel = UILabel()
     private let languageLabel = UILabel()
     private let overviewLabel = UILabel()
+    
+    // MARK: - Initializer
     
     init(movie: Movie) {
         self.movie = movie
@@ -34,6 +35,9 @@ final class MovieDetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,17 +47,14 @@ final class MovieDetailViewController: UIViewController {
         setupUI()
         configureData()
     }
+    
+    // MARK: - Setup UI
+    
     private func setupUI() {
         backdropImageView.contentMode = .scaleAspectFill
         backdropImageView.clipsToBounds = true
         backdropImageView.image = UIImage(systemName: "photo")
         backdropImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-//        posterImageView.contentMode = .scaleAspectFill
-//        posterImageView.clipsToBounds = true
-//        posterImageView.layer.cornerRadius = 12
-//        posterImageView.image = UIImage(systemName: "photo")
-//        posterImageView.translatesAutoresizingMaskIntoConstraints = false
         
         titleLabel.font = .boldSystemFont(ofSize: 24)
         titleLabel.numberOfLines = 0
@@ -81,55 +82,50 @@ final class MovieDetailViewController: UIViewController {
         overviewLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let stackView = UIStackView(arrangedSubviews: [
-                    titleLabel,
-                    releaseDateLabel,
-                    ratingLabel,
-                    voteCountLabel,
-                    popularityLabel,
-                    languageLabel,
-                    overviewLabel
-                ])
-                
-                stackView.axis = .vertical
-                stackView.spacing = 10
-                stackView.translatesAutoresizingMaskIntoConstraints = false
-                
-                view.addSubview(backdropImageView)
-//                view.addSubview(posterImageView)
-                view.addSubview(stackView)
+            titleLabel,
+            releaseDateLabel,
+            ratingLabel,
+            voteCountLabel,
+            popularityLabel,
+            languageLabel,
+            overviewLabel
+        ])
         
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(backdropImageView)
+        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-              backdropImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-              backdropImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-              backdropImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-              backdropImageView.heightAnchor.constraint(equalToConstant: 230),
-              
-              stackView.topAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: 20),
-              stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-              stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
-          ])
-            }
+            backdropImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backdropImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backdropImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backdropImageView.heightAnchor.constraint(equalToConstant: 230),
+            
+            stackView.topAnchor.constraint(equalTo: backdropImageView.bottomAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+    }
     
-    
+    // MARK: - Configure Data
     
     private func configureData() {
         titleLabel.text = movie.title
-                releaseDateLabel.text = "📅 Release Date: \(movie.releaseDate)"
-                ratingLabel.text = "⭐️ Rating: \(movie.voteAverage)"
-                voteCountLabel.text = "🗳️ Vote Count: \(movie.voteCount)"
-                popularityLabel.text = "🔥 Popularity: \(movie.popularity)"
-                languageLabel.text = "🌐 Language: \(movie.originalLanguage.uppercased())"
-                overviewLabel.text = "Overview:\n\(movie.overview)"
-                
-                if let backdropPath = movie.backdropPath {
-                    let fullBackdropURL = APIConstants.shareImagePathUrl() + backdropPath
-                    backdropImageView.fetchDataFrom(serverUrl: fullBackdropURL)
-                }
-                
-//                if let posterPath = movie.posterPath {
-//                    let fullPosterURL = APIConstants.shareImagePathUrl() + posterPath
-//                    posterImageView.fetchDataFrom(serverUrl: fullPosterURL)
-//                }
-            }
+        releaseDateLabel.text = "📅 Release Date: \(movie.releaseDate)"
+        ratingLabel.text = "⭐️ Rating: \(movie.voteAverage)"
+        voteCountLabel.text = "🗳️ Vote Count: \(movie.voteCount)"
+        popularityLabel.text = "🔥 Popularity: \(movie.popularity)"
+        languageLabel.text = "🌐 Language: \(movie.originalLanguage.uppercased())"
+        overviewLabel.text = "Overview:\n\(movie.overview)"
+        
+        if let backdropPath = movie.backdropPath {
+            let fullBackdropURL = APIConstants.shareImagePathUrl() + backdropPath
+            backdropImageView.fetchDataFrom(serverUrl: fullBackdropURL)
+        }
+        
+        
+    }
 }

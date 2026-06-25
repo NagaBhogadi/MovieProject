@@ -12,16 +12,20 @@ protocol NetworkProtocol {
 }
 
 final class NetworkManager: NetworkProtocol, Sendable {
+    
+    // MARK: - Singleton
+    
     static let shared: NetworkManager = NetworkManager()
     private init (){}
     
+    // MARK: - Fetch Data
+    
     func fetchDataFrom(
-    serverUrl: String,
-    completion: @escaping  ([Movie]) -> Void
+        serverUrl: String,
+        completion: @escaping  ([Movie]) -> Void
     ){
         guard let serverURL = URL(string: serverUrl) else {
             print("Server URL is invalid")
-            // we need to return something
             completion([])
             return
         }
@@ -29,8 +33,8 @@ final class NetworkManager: NetworkProtocol, Sendable {
         let urlRequest = URLRequest(url: serverURL)
         let urlSession = URLSession.shared
         urlSession.dataTask(with: urlRequest) { data, response, error in
-            // TODO: - code goes here
             
+            // TODO: - code goes here
             if error != nil {
                 print("Unable to fetch data from server, \(error!.localizedDescription)")
                 completion([])
@@ -43,8 +47,7 @@ final class NetworkManager: NetworkProtocol, Sendable {
                 return
             }
             
-            
-//MARK: -  parse the data into the model
+            //MARK: -  Parse  Data into Model
             
             do {
                 let movieResponse = try JSONDecoder().decode(MovieResponse.self, from: receivedData)
@@ -58,5 +61,5 @@ final class NetworkManager: NetworkProtocol, Sendable {
         .resume()
     }
 }
- 
+
 

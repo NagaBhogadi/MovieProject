@@ -7,11 +7,18 @@
 
 import Foundation
 
+// MARK: - Movie Response
+
 struct MovieResponse: Codable {
     let results: [Movie]
 }
 
+// MARK: - Movie Model
+
 struct Movie: Codable {
+    
+    // MARK: - Properties
+    
     let title: String
     let overview: String
     let posterPath: String?
@@ -21,6 +28,8 @@ struct Movie: Codable {
     let voteCount: Int
     let popularity: Double
     let originalLanguage: String
+    
+    // MARK: - Coding Keys
 
     enum CodingKeys: String, CodingKey {
         case title

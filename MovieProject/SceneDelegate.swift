@@ -10,8 +10,9 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    
+    // MARK: - Scene Life Cycle
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
@@ -19,14 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let movieVC = MovieViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: movieVC)
         let window = UIWindow(windowScene: windowScene)
-              
-              
-              
-              
-              window.rootViewController = navigationController
-              window.makeKeyAndVisible()
-              
-              self.window = window
+        
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+        
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
