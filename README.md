@@ -1,103 +1,179 @@
-# Movie API UIKit App
+# 🎬 Movie Explorer
 
-## Overview
+A modern iOS application built with **UIKit** and the **MVVM architecture** that allows users to discover popular movies from **The Movie Database (TMDB)**. The app features a clean, dark-themed interface, asynchronous image loading, dependency injection, and a well-organized project structure following iOS best practices.
 
-Movie API UIKit App is an iOS application built using **Swift** and **UIKit**.
+---
 
-This app fetches movie data from **TMDB API** and displays movies in a table view.
-When the user taps a movie, the app navigates to a detail screen and shows more movie information.
+# 📱 Features
 
-## Screenshot
+* 🎥 Browse popular movies from TMDB
+* 📄 View detailed information for each movie
+* 🖼️ Load movie posters and backdrops asynchronously
+* ⭐ Display ratings, vote count, popularity, and release date
+* 🌍 Show original movie language
+* ⏳ Activity Indicator while fetching data
+* 📱 Programmatic UIKit (No Storyboards)
+* 🧩 MVVM Architecture
+* 💉 Dependency Injection
+* 🧹 Clean Code with MARK sections
+* 🔄 Reusable UITableViewCell
+* 🌐 REST API Integration
+* 📦 Codable JSON Parsing
 
-### Movie Screen
+---
 
-<img width="295" height="640" alt="Simulator Screen Recording - iPhone 17 Pro - 2026-06-24 at 14 10 52" src="https://github.com/user-attachments/assets/ac03828c-87d5-4b02-9006-a794fbe956a1" />
+# 🏗️ Architecture
 
+This project follows the **MVVM (Model–View–ViewModel)** architecture.
 
-## Features
-
-* UIKit programmatic UI
-* TMDB API integration
-* UITableView with custom cell
-* Movie poster image loading
-* Activity indicator while loading data
-* Movie detail screen
-* Data passing between view controllers
-* JSON parsing using Codable
-* API call using URLSession
-* MVC architecture
-
-## Project Structure
-
-```text
-MovieProject
-├── Common
-│   └── ImageViewExtension.swift
-├── Constants
-│   └── APIConstants.swift
-├── Model
-│   └── Movie.swift
-├── Controller
-│   ├── MovieViewController.swift
-│   └── MovieDetailViewController.swift
-├── View
-│   └── MovieCell.swift
+```
+View
+│
+├── MovieViewController
+├── MovieDetailViewController
+│
+ViewModel
+│
+├── MovieDetailsViewModel
+│
+Model
+│
+├── Movie
+├── MovieResponse
+│
+Network
+│
 ├── NetworkManager
-│   └── NetworkManager.swift
-├── Screenshots
-│   ├── movie_list.gif
-│   └── movie_details.png
-└── README.md
+│
+Utilities
+│
+├── APIConstants
+├── UIImageView Extension
 ```
 
-## API Used
+---
 
-Movie data is fetched from TMDB API.
+# 🛠️ Technologies Used
 
-```text
-https://api.themoviedb.org/3/discover/movie
-```
-
-Image base URL:
-
-```text
-https://image.tmdb.org/t/p/w500
-```
-
-The API gives only an image path like this:
-
-```text
-/posterImagePath.jpg
-```
-
-So the app creates a full image URL like this:
-
-```swift
-let fullImageURL = APIConstants.sharePathImg() + posterPath
-```
-
-## Technologies Used
-
-* Swift
+* Swift 6
 * UIKit
-* UITableView
+* MVVM Architecture
 * URLSession
 * Codable
+* Auto Layout (Programmatic)
+* Dependency Injection
+* Singleton Pattern
+* Extensions
+* TMDB REST API
+
+---
+
+# 📂 Project Structure
+
+```
+MovieApp
+│
+├── Constants
+│   └── APIConstants.swift
+│
+├── Models
+│   ├── Movie.swift
+│   └── MovieResponse.swift
+│
+├── Network
+│   └── NetworkManager.swift
+│
+├── ViewModels
+│   └── MovieDetailsViewModel.swift
+│
+├── Views
+│   └── MovieCell.swift
+│
+├── Controllers
+│   ├── MovieViewController.swift
+│   └── MovieDetailViewController.swift
+│
+├── Extensions
+│   └── UIImageView+Extension.swift
+```
+
+---
+
+# 🚀 How It Works
+
+1. The application launches with `MovieViewController`.
+2. `MovieViewModel` requests movie data from `NetworkManager`.
+3. `NetworkManager` calls the TMDB Discover Movies API.
+4. The JSON response is decoded into Swift models using `Codable`.
+5. The ViewModel stores the movie data.
+6. The ViewController reloads the table view.
+7. Selecting a movie opens the detail screen with additional information.
+
+---
+
+# 📸 Screenshots
+
+### Movie List
+
+<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2026-06-25 at 09 47 55" src="https://github.com/user-attachments/assets/f2755fc9-0f34-4be6-bee4-404aff7da962" />
+
+### Movie Details
+
+<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2026-06-25 at 09 48 05" src="https://github.com/user-attachments/assets/a3be0fe3-64a5-4f13-b1c4-40fbeb2e4c00" />
+
+### App Working
+
+<img width="295" height="640" alt="Simulator Screen Recording - iPhone 17 Pro - 2026-06-25 at 09 48 49" src="https://github.com/user-attachments/assets/543ab9de-ee40-4098-bac0-c35b88612e02" />
+
+---
+
+# 🔑 API
+
+**Movie Database (TMDB)**
+
+* Discover Movies Endpoint
+* Poster Images
+* Backdrop Images
+
+---
+
+# 📚 Concepts Practiced
+
+* MVVM Architecture
+* Dependency Injection
+* UITableView
+* UITableViewCell
+* UINavigationController
+* URLSession Networking
+* JSON Parsing
+* Codable
 * Auto Layout
-* MVC
-* GitHub
+* UIImageView Extension
+* Async Image Loading
+* Singleton Pattern
+* Protocol-Oriented Programming
+* Memory Management (`weak self`)
+* Activity Indicator
+* Programmatic UI
 
-## What I Learned
+---
 
-* Creating UI programmatically
-* Fetching API data using URLSession
-* Parsing JSON using Codable
-* Loading images from URL
-* Creating custom UITableViewCell
-* Passing data to another view controller
-* Navigating using UINavigationController
-* Using Git and GitHub with Xcode
+# 🔮 Future Improvements
 
-## Author
+* Search Movies
+* Pagination
+* Pull to Refresh
+* Offline Caching
+* Favorites
+* Unit Testing
+* Swift Concurrency (async/await)
+* Image Caching
+* Error Handling Improvements
 
-Naga Rajitha Bhogadi
+---
+
+# 👩‍💻 Author
+
+**Naga Rajitha Bhogadi**
+
+Passionate iOS Developer focused on building clean, scalable, and maintainable UIKit applications while continuously learning modern iOS development practices.
