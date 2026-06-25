@@ -88,6 +88,11 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		9AB5E2932FEC8BE200C9C8E8 /* ViewModel */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +123,7 @@
 		9AB5E1562FEC36C100C9C8E8 = {
 			isa = PBXGroup;
 			children = (
+				9AB5E2932FEC8BE200C9C8E8 /* ViewModel */,
 				9AB5E1DC2FEC461D00C9C8E8 /* Common */,
 				9AB5E1D62FEC3F6C00C9C8E8 /* Model */,
 				9AB5E1D02FEC3F3500C9C8E8 /* Constants */,
@@ -164,6 +170,7 @@
 				9AB5E1D02FEC3F3500C9C8E8 /* Constants */,
 				9AB5E1D62FEC3F6C00C9C8E8 /* Model */,
 				9AB5E1DC2FEC461D00C9C8E8 /* Common */,
+				9AB5E2932FEC8BE200C9C8E8 /* ViewModel */,
 			);
 			name = MovieProject;
 			packageProductDependencies = (
