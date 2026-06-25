@@ -9,12 +9,14 @@ import UIKit
 
 // MARK: - Movie View Controller
 
-final class MovieViewController: UIViewController {
+final class MovieViewController: UIViewController, UISearchResultsUpdating {
+  
     
     // MARK: - UI Components
     
     private let tableView = UITableView()
     private let activityIndicator = UIActivityIndicatorView(style: .large)
+    private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Properties
     //   TODO: -  need to replace with dependency injection
@@ -43,6 +45,7 @@ final class MovieViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         setupTableView()
+        setupSearchBar()
         setupActivityIndicator()
         showLoader()
         viewModel.fetchMovies(){ [weak self]  in
@@ -53,6 +56,18 @@ final class MovieViewController: UIViewController {
         }
     }
     
+//    MARK: - Setup SearchBar
+   private func setupSearchBar() {
+       searchController.searchResultsUpdater = self
+       searchController.obscuresBackgroundDuringPresentation = false
+       searchController.searchBar.placeholder = "Search Movies"
+       
+       navigationItem.searchController = searchController
+       navigationItem.hidesSearchBarWhenScrolling = true
+       definesPresentationContext = true
+        
+    }
+   
     // MARK: - Set up TableView
     
     private func setupTableView() {
@@ -103,6 +118,15 @@ extension MovieViewController {
     func reloadTableView() {
         tableView.reloadData()
     }
+    //MARK: -  Updating Search Result
+
+        func updateSearchResults(for searchController: UISearchController) {
+            let text = searchController.searchBar.text ?? ""
+            viewModel.SearchMovie(with: text)
+            tableView.reloadData()
+        
+        }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -149,5 +173,9 @@ extension MovieViewController: UITableViewDelegate {
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
+
+
+
+
 
 
