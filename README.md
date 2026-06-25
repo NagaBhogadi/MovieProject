@@ -115,11 +115,12 @@ MovieApp
 
 ### Movie List
 
-<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2026-06-25 at 09 47 55" src="https://github.com/user-attachments/assets/f2755fc9-0f34-4be6-bee4-404aff7da962" />
+<img width="300" height="700" alt="Simulator Screenshot - iPhone 17 Pro - 2026-06-25 at 09 47 55" src="https://github.com/user-attachments/assets/f2755fc9-0f34-4be6-bee4-404aff7da962" />
+
 
 ### Movie Details
 
-<img width="1206" height="2622" alt="Simulator Screenshot - iPhone 17 Pro - 2026-06-25 at 09 48 05" src="https://github.com/user-attachments/assets/a3be0fe3-64a5-4f13-b1c4-40fbeb2e4c00" />
+<img width="300" height="700" alt="Simulator Screenshot - iPhone 17 Pro - 2026-06-25 at 09 48 05" src="https://github.com/user-attachments/assets/a3be0fe3-64a5-4f13-b1c4-40fbeb2e4c00" />
 
 ### App Working
 
