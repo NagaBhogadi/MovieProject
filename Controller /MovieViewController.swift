@@ -48,12 +48,13 @@ final class MovieViewController: UIViewController, UISearchResultsUpdating {
         setupSearchBar()
         setupActivityIndicator()
         showLoader()
-        viewModel.fetchMovies(){ [weak self]  in
+        viewModel.completionHandler = { [weak self]  in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
                 self?.hideLoader()
             }
         }
+        viewModel.fetchMovies()
     }
     
 //    MARK: - Setup SearchBar
@@ -63,7 +64,7 @@ final class MovieViewController: UIViewController, UISearchResultsUpdating {
        searchController.searchBar.placeholder = "Search Movies"
        
        navigationItem.searchController = searchController
-       navigationItem.hidesSearchBarWhenScrolling = true
+       navigationItem.hidesSearchBarWhenScrolling = false
        definesPresentationContext = true
         
     }

@@ -7,7 +7,8 @@
 import Foundation
 
 protocol MovieDetailsViewModelProtocol: AnyObject {
-    func fetchMovies(completion: @escaping () -> Void)
+    var completionHandler: (()-> Void)? {get set}
+    func fetchMovies()
     func numberOfMovies() -> Int
     func movie(at index: Int) -> Movie
     func SearchMovie(with searchText: String)
@@ -15,18 +16,26 @@ protocol MovieDetailsViewModelProtocol: AnyObject {
 
 final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
     
+    var completionHandler: (()-> Void)?
+    var networkManager : NetworkProtocol?
+    
     // MARK: - Properties
     
     private var movies: [Movie] = []
     private var filteredMovies: [Movie] = []
     
+    init(networkManager: NetworkProtocol = NetworkManager.shared){
+        self.networkManager = networkManager
+    }
+    
     // MARK: - API Call
     
-    func fetchMovies(completion: @escaping () -> Void) {
-        NetworkManager.shared.fetchDataFrom(serverUrl: APIConstants.sharePathUrl()) { [weak self] fetchedMovies in
+    func fetchMovies() {
+        let manager = networkManager ?? networkManager ?? NetworkManager.shared
+        manager.fetchDataFrom(serverUrl: APIConstants.sharePathUrl()) { [weak self] fetchedMovies in
             self?.movies = fetchedMovies
             self?.filteredMovies = fetchedMovies
-            completion()
+            self?.completionHandler?()
         }
     }
     

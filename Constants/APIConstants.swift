@@ -22,8 +22,11 @@ struct APIConstants {
     
     static func sharePathUrl() -> String {
         return apiURLPath + APIKEY
+        
     }
+    
     static func shareImagePathUrl() -> String {
         return imageURLPath
+        
     }
 }
