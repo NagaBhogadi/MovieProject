@@ -40,6 +40,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		9A6A13142FF57D140008A6B7 /* MovieList */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MovieList;
+			sourceTree = "<group>";
+		};
 		9AB5E1612FEC36C100C9C8E8 /* MovieProject */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -63,24 +68,9 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		9AB5E1972FEC370500C9C8E8 /* View */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = View;
-			sourceTree = "<group>";
-		};
-		9AB5E1982FEC371200C9C8E8 /* Controller  */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Controller ";
-			sourceTree = "<group>";
-		};
 		9AB5E1D02FEC3F3500C9C8E8 /* Constants */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		9AB5E1D62FEC3F6C00C9C8E8 /* Model */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Model;
 			sourceTree = "<group>";
 		};
 		9AB5E1DC2FEC461D00C9C8E8 /* Extention */ = {
@@ -123,12 +113,10 @@
 		9AB5E1562FEC36C100C9C8E8 = {
 			isa = PBXGroup;
 			children = (
+				9A6A13142FF57D140008A6B7 /* MovieList */,
 				9AB5E2932FEC8BE200C9C8E8 /* ViewModel */,
 				9AB5E1DC2FEC461D00C9C8E8 /* Extention */,
-				9AB5E1D62FEC3F6C00C9C8E8 /* Model */,
 				9AB5E1D02FEC3F3500C9C8E8 /* Constants */,
-				9AB5E1982FEC371200C9C8E8 /* Controller  */,
-				9AB5E1972FEC370500C9C8E8 /* View */,
 				9AB5E1962FEC36F000C9C8E8 /* Network */,
 				9AB5E1612FEC36C100C9C8E8 /* MovieProject */,
 				9AB5E1782FEC36C200C9C8E8 /* MovieProjectTests */,
@@ -163,12 +151,10 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				9A6A13142FF57D140008A6B7 /* MovieList */,
 				9AB5E1612FEC36C100C9C8E8 /* MovieProject */,
 				9AB5E1962FEC36F000C9C8E8 /* Network */,
-				9AB5E1972FEC370500C9C8E8 /* View */,
-				9AB5E1982FEC371200C9C8E8 /* Controller  */,
 				9AB5E1D02FEC3F3500C9C8E8 /* Constants */,
-				9AB5E1D62FEC3F6C00C9C8E8 /* Model */,
 				9AB5E1DC2FEC461D00C9C8E8 /* Extention */,
 				9AB5E2932FEC8BE200C9C8E8 /* ViewModel */,
 			);

@@ -17,16 +17,15 @@ struct APIConstants {
     // MARK: - API Key
     
     static let APIKEY = "c91ed3a7a344459eccad9687acf0d07e"
+    //  static let APIKEY = ""
     
     // MARK: - Helper Methods
     
     static func sharePathUrl() -> String {
         return apiURLPath + APIKEY
-        
     }
     
     static func shareImagePathUrl() -> String {
         return imageURLPath
-        
     }
 }

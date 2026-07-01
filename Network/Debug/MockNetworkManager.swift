@@ -10,20 +10,19 @@ import Foundation
 // MARK: - Mock Network Manager
 
 final class MockNetworkManager:NetworkProtocol {
-
+    
     // MARK: - Singleton
-
+    
     static let shared = MockNetworkManager()
-
+    
     private init() {}
-
+    
     // MARK: - Fetch Mock Data
-
+    
     func fetchDataFrom(
         serverUrl: String,
-        completion: @escaping ([Movie]) -> Void
+        completion: @escaping (NetworkState) -> Void
     ) {
-
         let movie = Movie(
             title: "Movie",
             overview: "Overview",
@@ -35,7 +34,6 @@ final class MockNetworkManager:NetworkProtocol {
             popularity: 99.0,
             originalLanguage: "en"
         )
-
-        completion([movie])
+        completion(.Sucessful(data: [movie]))
     }
 }

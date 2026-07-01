@@ -101,6 +101,5 @@ final class MovieCell: UITableViewCell {
             posterImageView.image = UIImage(systemName: "photo")
         }
     }
-    
 }
 

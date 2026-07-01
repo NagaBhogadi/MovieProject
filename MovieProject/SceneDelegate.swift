@@ -10,21 +10,24 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: MovieCoordinatorProtocol?
     
     // MARK: - Scene Life Cycle
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let viewModel = MovieDetailsViewModel(networkManager: MockNetworkManager.shared)
-        let movieVC = MovieViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: movieVC)
+//        step:1
         let window = UIWindow(windowScene: windowScene)
+        let coordinator = MovieProjectCoordinator(window: window)
+        coordinator.start()
+        self.coordinator = coordinator
+        self.window = window
         
-        window.rootViewController = navigationController
+        
+        
         window.makeKeyAndVisible()
         
-        self.window = window
+       
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
