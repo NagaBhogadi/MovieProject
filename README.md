@@ -124,7 +124,8 @@ MovieApp
 
 ### App Working
 
-<img width="295" height="640" alt="Simulator Screen Recording - iPhone 17 Pro - 2026-06-25 at 09 48 49" src="https://github.com/user-attachments/assets/543ab9de-ee40-4098-bac0-c35b88612e02" />
+<img width="295" height="640" alt="Simulator Screen Recording - iPhone 17 Pro - 2026-06-25 at 13 44 56" src="https://github.com/user-attachments/assets/669f8b28-5a24-4a06-b7ef-83f31369d53a" />
+
 
 ---
 
