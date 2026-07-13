@@ -12,6 +12,11 @@ extension UIImageView {
     // MARK: - Fetch Image
     
     func fetchDataFrom(serverUrl: String) {
+        if let cachedImage = ImageCacheManager.shared.getImage(forKey: serverUrl) {
+                print("Image loaded from cache")
+                self.image = cachedImage
+                return
+            }
         guard let serverURL = URL(string: serverUrl) else {
             print("Server URL is invalid")
             return self.image = UIImage(systemName: "heart.fill")
@@ -32,8 +37,12 @@ extension UIImageView {
             
             DispatchQueue.main.async {[weak self] in
                 let downlodedImage = UIImage(data: receivedData)
+                if let image = downlodedImage {
+                       ImageCacheManager.shared.saveImage(image, forKey: serverUrl)
+                       print("Image loaded from server")
+                   }
                 self?.image = downlodedImage
-                self?.image = UIImage(data: receivedData)
+//                self?.image = UIImage(data: receivedData)
                 print(downlodedImage)
             }
         }

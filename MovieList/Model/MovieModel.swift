@@ -19,6 +19,7 @@ struct Movie: Codable {
     
     // MARK: - Properties
     
+    let id: Int
     let title: String
     let overview: String
     let posterPath: String?
@@ -32,6 +33,7 @@ struct Movie: Codable {
     // MARK: - Coding Keys
 
     enum CodingKeys: String, CodingKey {
+        case id
         case title
         case overview
         case posterPath = "poster_path"

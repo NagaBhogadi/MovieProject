@@ -58,7 +58,7 @@ final class NetworkManager: NetworkProtocol, Sendable {
                 let movieResponse = try JSONDecoder().decode(MovieResponse.self, from: receivedData)
                 print(movieResponse.results)
                 //                This line sends data back to ViewModel:
-                completion(.Sucessful(data:movieResponse.results))
+                completion(.Sucessful(data:movieResponse))
             } catch {
                 print("Unable to parse the data into the model", error)
                 completion(.failure(error: .decodingError))

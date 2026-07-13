@@ -26,12 +26,21 @@ final class MovieDetailViewController: UIViewController {
     private let languageLabel = UILabel()
     private let overviewLabel = UILabel()
     
+    
     private let nextButton: UIButton =  {
         let button = UIButton(type: .system)
         button.setTitle("Go To Next Screen",for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         
+        return button
+    }()
+    
+    private let favoriteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("♡ Add Favorite", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.setTitleColor(.systemPink, for: .normal)
         return button
     }()
     
@@ -58,6 +67,9 @@ final class MovieDetailViewController: UIViewController {
         setupUI()
         setupNextButton()
         configureData()
+        
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        updateFavoriteButtonTitle()
     }
     
     // MARK: - Setup UI
@@ -100,7 +112,9 @@ final class MovieDetailViewController: UIViewController {
             voteCountLabel,
             popularityLabel,
             languageLabel,
-            overviewLabel
+            overviewLabel,
+            favoriteButton
+            
         ])
         
         stackView.axis = .vertical
@@ -138,6 +152,51 @@ final class MovieDetailViewController: UIViewController {
     @objc private func nextButtonTapped() {
         coordinator?.showBlankScreen(number: 1)
     }
+    @objc private func favoriteButtonTapped() {
+        
+        if FileManagerHelper.shared.isFavorite(id: movie.id) {
+            FileManagerHelper.shared.removeFavorite(id: movie.id)
+            print("Removed from FileManager:", movie.id)
+        } else {
+            FileManagerHelper.shared.addFavorite(id: movie.id)
+            print("Saved using FileManager:", movie.id)
+        }
+        
+        updateFavoriteButtonTitle()
+    }
+    private func updateFavoriteButtonTitle() {
+        
+        if FileManagerHelper.shared.isFavorite(id: movie.id) {
+            favoriteButton.setTitle("♥ Added Favorite", for: .normal)
+        } else {
+            favoriteButton.setTitle("♡ Add Favorite", for: .normal)
+        }
+    }
+    
+//    @objc private func favoriteButtonTapped() {
+//        
+//        if UserDefaultsManager.shared.isFavorite(id: movie.id) {
+//            UserDefaultsManager.shared.removeFavorite(id: movie.id)
+//            FileManagerHelper.shared.removeFavorite(id: movie.id)
+//            print("Removed from both: ",movie.id )
+//        } else {
+//            UserDefaultsManager.shared.addFavorite(id: movie.id)
+//            FileManagerHelper.shared.addFavorite(id: movie.id)
+//            print("Saved in both: ",movie.id )
+//            
+//        }
+//        
+//        updateFavoriteButtonTitle()
+//    }
+//
+//    private func updateFavoriteButtonTitle() {
+//        
+//        if UserDefaultsManager.shared.isFavorite(id: movie.id) {
+//            favoriteButton.setTitle("♥ Added Favorite", for: .normal)
+//        } else {
+//            favoriteButton.setTitle("♡ Add Favorite", for: .normal)
+//        }
+//    }
     
     // MARK: - Configure Data
     

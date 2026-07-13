@@ -29,3 +29,9 @@ struct APIConstants {
         return imageURLPath
     }
 }
+
+enum Environment {
+    case dev
+    case qa
+    case prod
+}

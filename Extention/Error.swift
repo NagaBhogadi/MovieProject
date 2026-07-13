@@ -13,6 +13,6 @@ enum NetworkError: String ,Error {
 }
 enum NetworkState {
     case loading
-    case Sucessful (data:[Movie])
+    case Sucessful (data:MovieResponse)
     case failure(error: NetworkError)
 }

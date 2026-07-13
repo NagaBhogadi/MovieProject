@@ -74,6 +74,7 @@ final class MovieViewController: UIViewController, UISearchResultsUpdating {
                     
                 }
             }
+       
         }
         //        then start the fetching data from fetchMovies
         viewModel.fetchMovies()

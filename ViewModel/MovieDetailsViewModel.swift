@@ -36,14 +36,30 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
             case .loading:
                 self?.completionHandler?(nil)
             case.Sucessful(data: let fetchedMovies):
-                self?.movies = fetchedMovies
-                self?.filteredMovies = fetchedMovies
+                self?.movies = fetchedMovies.results
+                self?.filteredMovies = fetchedMovies.results
                 self?.completionHandler?("")
-            case .failure(error: let error):
-                self?.completionHandler?(error.rawValue)
+            case .failure(let error):
+                self?.completionHandler?(error.localizedDescription)
             }
         }
     }
+//    private func handleFailure(error: NetworkError) {
+//        switch error {
+//
+//        case .decodingError:
+//            print("Decoding error")
+//        case .invalidURL:
+//            print("Invalid URL")
+//        case .noData:
+//            print("No data found")
+//        case .serverError:
+//            print("Server error")
+//        case .noInternet:
+//        print("No internet connection")
+//        }
+//        
+//    }
     
     // MARK: - Helper Methods
     
